@@ -52,6 +52,13 @@
             font-weight: 700;
         }
         
+        .position {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+            font-weight: 500;
+        }
+        
         .title {
             font-size: 1.4rem;
             margin-bottom: 15px;
@@ -69,7 +76,7 @@
             border-radius: 10px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px极15px rgba(0, 0, 0, 0.05);
         }
         
         h2 {
@@ -103,6 +110,17 @@
             color: #2c3e50;
             margin-bottom: 10px;
             font-size: 1.2rem;
+            display: inline;
+        }
+        
+        .pub-title-link {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .pub-title-link:hover {
+            color: #3498db;
+            text-decoration: underline;
         }
         
         .pub-authors {
@@ -120,18 +138,19 @@
         .pub-links {
             display: flex;
             gap: 15px;
+            margin-top: 10px;
         }
         
         .pub-link {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 8px 15px;
+            padding: 6px 12px;
             background: #3498db;
             color: white;
             border-radius: 5px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -143,6 +162,7 @@
         
         .pub-link.pdf {
             background: #e74c3c;
+            margin-left: 10px;
         }
         
         .pub-link.pdf:hover {
@@ -188,32 +208,12 @@
             color: #2c3e50;
         }
         
-        .instructions {
-            background-color: #e8f4fc;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .instructions h3 {
-            color: #2c3e50;
-            margin-top: 0;
-        }
-        
-        .instructions ol {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
+        .title-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 10px;
-        }
-        
-        .instructions code {
-            background-color: #f1f1f1;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
         }
     </style>
 </head>
@@ -234,235 +234,202 @@
                 <p>My work integrates field observations, experimental studies, and computational modeling to understand plant adaptations to environmental changes and their evolutionary implications.</p>
             </div>
         </section>
-
-          <section class="section">
+        
+        <section class="section">
             <h2>Publications</h2>
-      <div class="publication-item">
-  <div class="pub-title">
-    <a href="https://doaj.org/article/a4bb254b5d674c949549748231248185"
-       target="_blank" style="text-decoration:none; color:#2c3e50;">
-      Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis
-    </a>
-    <a class="pub-link pdf" href="pdfs/paper1.pdf"
-       download="Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis.pdf"
-       style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
-            
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://www.sciencedirect.com/science/article/pii/S2468265925001374" 
-                        target="_blank" style="text-decoration:none; color:#2c3e50;">
-     Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants
-    </a>
-    <a class="pub-link pdf" href="pdfs/paper2.pdf"
-       download="Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants.pdf"
-       style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
-            
-            <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.20097"  target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale
-                        <i class="fas fa-external-link-alt"></i> View Article
-                  </a>
-                    <a class="pub-link pdf" href="pdfs/paper3.pdf" download="Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale.pdf"
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
-
-            <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2435.14562" class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://doaj.org/article/a4bb254b5d674c949549748231248185" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper4.pdf" download="Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper1.pdf" download="Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Frontiers in Plant Science, 2023, 14, 1124059</div>
+            </div>
+            
+            <div class="publication-item">
+                <div class="title-container">
+                    <a href="https://www.sciencedirect.com/science/article/pii/S2468265925001374" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper2.pdf" download="Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Plant Diversity, 2025</div>
+            </div>
+            
+            <div class="publication-item">
+                <div class="title-container">
+                    <a href="https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.20097" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper3.pdf" download="Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">New Phytologist, 2024, 241(5), 1949-1962</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://www.plant-ecology.com/CN/10.17521/cjpe.2022.0298"class="pub-link"  target="_blank"  style="text-decoration:none; color:#2c3e50;">
-                        木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系
-                        <i class="fas fa-external-link-alt"></i> View Article
-                   </a>
-                    <a class="pub-link pdf" href="pdfs/paper5.pdf" download="木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系.pdf"
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                <div class="title-container">
+                    <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2435.14562" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper4.pdf" download="Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Functional Ecology, 2023, 37(9), 2460-2473</div>
+            </div>
+
+            <div class="publication-item">
+                <div class="title-container">
+                    <a href="https://www.plant-ecology.com/CN/10.17521/cjpe.2022.0298" class="pub-title-link" target="_blank">
+                        <div class="pub-title">木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper5.pdf" download="木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">植物生态学报, 2023, 47(4), 504-516</div>
+            </div>
         
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1257499/full" class="pub-link"  target="_blank" 
-                        style="text-decoration:none; color:#2c3e50;">
-                        Physiological cold tolerance evolves faster than climatic niches in plants
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls极2023.1257499/full" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Physiological cold tolerance evolves faster than climatic niches in plants</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper6.pdf" download="Physiological cold tolerance evolves faster than climatic niches in plants.pdf"
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper6.pdf" download="Physiological cold tolerance evolves faster than climatic niches in plants.pdf">
+                        <i class="fas极fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Frontiers in Plant Science, 2023, 14, 1257499</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jse.12932" class="pub-link" target="_blank"
-                        style="text-decoration:none; color:#2c3e50;">
-                        Climatic niche divergence explains angiosperm diversification across clades in China
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://onlinelibrary.wiley.com/doi/full/极10.1111/jse.12932" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Climatic niche divergence explains angiosperm diversification across clades in China</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper7.pdf" download="Climatic niche divergence explains angiosperm diversification across clades in China.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper7.pdf" download="Climatic niche divergence explains angiosperm diversification across clades in China.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Journal of Systematics and Evolution, 2023, 61(2), 328-341</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://pubmed.ncbi.nlm.nih.gov/36209451/" class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/36209451/" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper8.pdf" download="Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper8.pdf" download="Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Tree Physiology, 2022, 42(12), 2451-2465</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://pubmed.ncbi.nlm.nih.gov/39650675/"class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/39650675/" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper9.pdf" download="Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China.pdf"  
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper9.pdf" download="Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Plant Physiology and Biochemistry, 2024, 207, 108357</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://onlinelibrary.wiley.com/doi/10.1111/plb.13460"class="pub-link" target="_blank"  style="text-decoration:none; color:#2c3e50;">
-                        Correlations between photosynthetic heat tolerance and leaf anatomy and climatic niche in Asian mangrove trees
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://onlinelibrary.wiley.com/doi/10.1111/plb.13460" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Correlations between photosynthetic heat tolerance and leaf anatomy and climatic niche in Asian mangrove trees</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper10.pdf" download="Correlations between photosynthetic heat tolerance and leaf anatomy and climatic niche in Asian mangrove trees.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper10.pdf" download="Correlations between photosynthetic heat tolerance and极leaf anatomy and climatic niche in Asian mangrove trees.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Plant Biology, 2023, 25(3), 432-443</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://academic.oup.com/aob/article/130/3/345/6454392?login=true" class="pub-link"target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://academic.oup.com/aob/article/130/3/345/6454392?login=true" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper11.pdf" download="Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper11.pdf" download="Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Annals of Botany, 2022, 130(3), 345-359</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://www.whzwxyj.cn/cn/article/doi/10.11913/PSJ.2095-0837.2021.50457" class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://www.whzwxyj.cn/cn/article/doi/10.11913/PSJ.2095-0837.2021.50457" class="pub-title-link" target="_blank">
+                        <div class="pub-title">气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper12.pdf" download="气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper12.pdf" download="气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">植物科学学报, 2022, 40(2), 145-157</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://pubmed.ncbi.nlm.nih.gov/32635988/" class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Global convergence in the balance between leaf water supply and demand across vascular land plants
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/32635988/" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Global convergence in the balance between leaf water supply and demand across vascular land plants</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper13.pdf" download="Global convergence in the balance between leaf water supply and demand across vascular land plants.pdf"
-                         style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                    <a class="pub-link pdf" href="pdfs/paper13.pdf" download="Global convergence in the balance between leaf water supply and demand across vascular land plants.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Nature Communications, 2020, 11(1), 1-11</div>
+            </div>
 
             <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://www.sciencedirect.com/science/article/pii/S0981942820300437"class="pub-link"  target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane
-                        <i class="fas fa-external-link-alt"></i> View Article
+                <div class="title-container">
+                    <a href="https://www.sciencedirect.com/science/article/pii/S0981942820300437" class="pub-title-link" target="_blank">
+                        <div class="pub-title">Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane</div>
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper14.pdf" download="Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
-            <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://pubmed.ncbi.nlm.nih.gov/30158139/"class="pub-link"  target="_blank" style="text-decoration:none; color:#2c3e50;">
-                        The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit
-                        <i class="fas fa-external-link-alt"></i> View Article
+                    <a class="pub-link pdf" href="pdfs/paper14.pdf" download="Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane.pdf">
+                        <i class="fas fa-file极pdf"></i> PDF
                     </a>
-                    <a class="pub-link pdf" href="pdfs/paper15.pdf" download="The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit.pdf"
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
-            <div class="publication-item">
-                <div class="pub-title">
-                <div class="pub-links">
-                    <a href="https://plantscience.cn/cn/article/doi/10.11913/PSJ.2095-0837.2016.50790#:~:text=%E6%91%98%E8%A6%81%3A,%E6%B6%A6%E6%A5%A0%E5%B1%9E%E6%A4%8D%E7%89%A9%E5%B1%9E%E4%BA%8E%E5%9F%BA%E9%83%A8%E8%A2%AB%E5%AD%90%E6%A4%8D%E7%89%A9%E7%B1%BB%E7%BE%A4%EF%BC%8C%E5%A4%A7%E9%83%A8%E5%88%86%E7%89%A9%E7%A7%8D%E5%B1%80%E9%99%90%E5%88%86%E5%B8%83%E4%BA%8E%E7%83%AD%E5%B8%A6%E4%BA%9A%E7%83%AD%E5%B8%A6%E6%A3%AE%E6%9E%97%E7%9A%84%E6%BD%AE%E6%B9%BF%E7%94%9F%E5%A2%83%EF%BC%8C%E4%BD%86%E4%B9%9F%E6%9C%89%E4%BA%9F%E7%89%A9%E7%A7%8D%E5%88%86%E5%B8%83%E8%8C%83%E5%9B%B4%E8%BE%83%E5%B9%BF%E3%80%82%20%E6%9C%AC%E7%A0%94%E7%A9%B6%E4%BB%A5%E6%B6%A6%E6%A5%A0%E5%B1%9E11%E4%B8%AA%E7%89%A9%E7%A7%8D%E7%9A%84%E5%B9%BC%E8%8B%97%E4%B8%BA%E6%9D%90%E6%96%99%EF%BC%8C%E6%B5%8B%E5%AE%9A%E4%BA%86%E4%B8%80%E7%B3%BB%E5%88%97%E6%A4%8D%E7%89%A9%E5%8F%B6%E7%89%87%E6%B0%B4%E5%8A%9B%E5%AD%A6%E6%80%A7%E7%8A%B6%E5%92%8C%E8%A7%A3%E5%89%96%E7%BB%93%E6%9E%84%EF%BC%8C%E5%8C%85%E6%8B%AC%EF%BC%9A%E6%AF%94%E5%8F%B6%E9%87%8D%E3%80%81%E5%8F%B6%E7%89%87%E5%AF%86%E5%BA%A6%E3%80%81%E6%B0%94%E5%AD%94%E5%AF%86%E5%BA%A6%E3%80%81%E5%8F%B6%E8%84%89%E5%AF%86%E5%BA%A6%E3%80%81%E8%86%A8%E5%8E%8B%E4%B8%A7%E5%A4%B1%E7%82%B9%E6%B0%B4%E5%8A%BF%E3%80%81%E6%A0%85%E6%A0%8F%E7%BB%84%E7%BB%87%E5%92%8C%E6%B5%B7%E7%BB%B5%E7%BB%87%E5%8E%9A%E5%BA%A6%E7%AD%89%E3%80%82" 
-                        class="pub-link" target="_blank" style="text-decoration:none; color:#2c3e50;">润楠属广布种和狭域种幼苗生理生态特征
-                        <i class="fas fa-external-link-alt"></i> View Article
-                    </a>
-                    <a class="pub-link pdf" href="pdfs/paper16.pdf" download="润楠属广布种和狭域种幼苗生理生态特征.pdf" 
-                        style="margin-left:8px; padding:4px 10px; font-size:0.85rem;">
-      PDF
-    </a>
-  </div>
-</div>
+                </div>
+                <div class="pub-journal">Plant Physiology and Biochemistry, 2020, 155, 773-784</div>
+            </div>
 
-    
+            <div class="publication-item">
+                <div class="title-container">
+                    <a href="极ttps://pubmed.ncbi.nlm.nih.gov/30158139/" class="pub-title-link" target="_blank">
+                        <div class="pub-title">The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper15.pdf" download="The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">Global Change Biology, 2018, 24(7), 3141-3154</div>
+            </div>
+
+            <div class="publication-item">
+                <div class="title-container">
+                    <a href="https://plantscience.cn/cn/article/doi/10.11913/PSJ.2095-0837.2016.50790" class="pub-title-link" target="_blank">
+                        <div class="pub-title">润楠属广布种和狭域种幼苗生理生态特征</div>
+                    </a>
+                    <a class="pub-link pdf" href="pdfs/paper16.pdf" download="润楠属广布种和狭域种幼苗生理生态特征.pdf">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+                <div class="pub-journal">植物科学学报, 2017, 35(1), 78-87</div>
+            </div>
+        </section>
+
         <section class="section">
             <h2>Contact</h2>
             <div class="contact-info">
