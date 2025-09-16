@@ -215,28 +215,29 @@
             gap: 10px;
             margin-bottom: 10px;
         }
-        /* 标题+PDF 同一行，标题过长自动压缩 */
-.title-line {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;               /* 标题与按钮间距 */
+       .title-line {
+    position: relative;          /* 作为定位包含块 */
+    display: inline-block;       /* 宽度由文字决定，不是 100% */
+    max-width: 100%;             /* 不超出容器 */
 }
 
 .pub-title {
-    flex: 1 1 0;            /* 占满剩余空间，可收缩 */
-    min-width: 0;           /* 允许压缩到比内容更窄 */
+    display: inline;             /* 正常流，可自动换行 */
     font-weight: 600;
     font-size: 1.2rem;
-    white-space: nowrap;    /* 不换行 */
-    overflow: hidden;
-    text-overflow: ellipsis; /* 超出部分省略号 */
+    line-height: 1.45;
+    padding-right: 52px;         /* 给按钮留 48px + 4px 间距 */
 }
 
 .pub-link.pdf {
-    flex: 0 0 auto;         /* 不放大、不缩小、固定内容宽度 */
-    padding: 4px 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;                   /* 贴在最后一行基线 */
+    padding: 2px 8px;
     font-size: 0.85rem;
     line-height: 1;
+    border-radius: 4px;
+    white-space: nowrap;
 }
     </style>
 </head>
