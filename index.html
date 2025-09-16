@@ -239,6 +239,38 @@
     border-radius: 4px;
     white-space: nowrap;
 }
+        /* 1. 整个条目左对齐，让 inline 元素自然流排 */
+.publication-item {
+    line-height: 1.8;
+}
+
+/* 2. 标题链接：允许自动折行，紧跟 PDF */
+.pub-title-link {
+    display: inline;          /* 关键：行内，可折行 */
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+.pub-title-link:hover {
+    text-decoration: underline;
+}
+
+/* 3. PDF 按钮：行内元素，永远跟在标题后面 */
+.pub-link.pdf-inline {
+    display: inline-block;    /* 保证可以设 padding 等 */
+    margin-left: 6px;         /* 与标题隔一点 */
+    padding: 2px 8px;
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    line-height: 1;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+.pub-link.pdf-inline:hover {
+    background: #c0392b;
+}
     </style>
 </head>
 <body>
@@ -267,7 +299,7 @@
                         <div class="pub-title">Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper1.pdf" download="Interactive effects of life cycle and monocot-dicot lineage on genome size–trait relationships in angiosperms: a phylogenetically informed analysis.pdf">
-                       PDF
+                        PDF
                     </a>
                 </div>
             </div>
@@ -278,7 +310,7 @@
                         <div class="pub-title">Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper2.pdf" download="Differences in leaf heat and drought tolerance but not cold tolerance between karst and non-karst forest plants.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                       PDF
                     </a>
                 </div>
             </div>
@@ -289,7 +321,7 @@
                         <div class="pub-title">Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper3.pdf" download="Contrasting drought tolerance traits of woody plants is associated with mycorrhizal types at the global scale.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                        PDF
                     </a>
                 </div>
             </div>
@@ -300,7 +332,7 @@
                         <div class="pub-title">Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper4.pdf" download="Contrasting heat tolerance of evergreen and deciduous urbanwoody species during heat waves.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                       PDF
                     </a>
                 </div>
             </div>
@@ -311,7 +343,7 @@
                         <div class="pub-title">木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper5.pdf" download="木兰科植物叶片光合系统耐热性与叶片形态及温度生态位的关系.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -322,7 +354,7 @@
                         <div class="pub-title">Physiological cold tolerance evolves faster than climatic niches in plants</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper6.pdf" download="Physiological cold tolerance evolves faster than climatic niches in plants.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -333,7 +365,7 @@
                         <div class="pub-title">Climatic niche divergence explains angiosperm diversification across clades in China</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper7.pdf" download="Climatic niche divergence explains angiosperm diversification across clades in China.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                       PDF
                     </a>
                 </div>
             </div>
@@ -344,7 +376,7 @@
                         <div class="pub-title">Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper8.pdf" download="Stem hydraulic conductivity and embolism resistance of Quercus species are associated with their climatic niche.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                        PDF
                     </a>
                 </div>
             </div>
@@ -355,7 +387,7 @@
                         <div class="pub-title">Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper9.pdf" download="Moderate photoinhibition of PSII and oxidation of P700 contribute to chilling tolerance of tropical tree species in subtropics of China.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                        PDF
                     </a>
                 </div>
             </div>
@@ -366,7 +398,7 @@
                         <div class="pub-title">Correlations between photosynthetic heat tolerance and leaf anatomy and climatic niche in Asian mangrove trees</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper10.pdf" download="Correlations between photosynthetic heat tolerance and极leaf anatomy and climatic niche in Asian mangrove trees.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -377,7 +409,7 @@
                         <div class="pub-title">Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper11.pdf" download="Correlations between leaf economics, mechanical resistance and drought tolerance across 41 cycad species.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                        PDF
                     </a>
                 </div>
             </div>
@@ -388,7 +420,7 @@
                         <div class="pub-title">气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper12.pdf" download="气候生态位进化与物种多样化的关系——以泛热带植物番荔枝科为例.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -399,7 +431,7 @@
                         <div class="pub-title">Global convergence in the balance between leaf water supply and demand across vascular land plants</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper13.pdf" download="Global convergence in the balance between leaf water supply and demand across vascular land plants.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -410,7 +442,7 @@
                         <div class="pub-title">Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper14.pdf" download="Foliar application of nanoparticles mitigates the chilling effect on photosynthesis and photoprotection in sugarcane.pdf">
-                        <i class="fas fa-file极pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -421,7 +453,7 @@
                         <div class="pub-title">The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper15.pdf" download="The physiological cold tolerance of warm-climate plants is correlated with their latitudinal range limit.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                         PDF
                     </a>
                 </div>
             </div>
@@ -432,7 +464,7 @@
                         <div class="pub-title">润楠属广布种和狭域种幼苗生理生态特征</div>
                     </a>
                     <a class="pub-link pdf" href="pdfs/paper16.pdf" download="润楠属广布种和狭域种幼苗生理生态特征.pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
+                        PDF
                     </a>
                 </div>
             </div>
