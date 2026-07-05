@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools - Yin Wen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c3e50 0%, #4a6580 100%);
+      color: white;
+      padding: 34px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.35rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #ecf0f1;
+      font-size: 1.05rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .tool-card {
+      display: block;
+      min-height: 150px;
+      padding: 20px;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      color: #333;
+      text-decoration: none;
+      background: #fbfcfd;
+      transition: all 0.25s ease;
+    }
+
+    .tool-card:hover {
+      border-color: #3498db;
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .tool-icon {
+      color: #3498db;
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+
+    .tool-card h2 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .tool-card p {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Tools</h1>
+      <div class="subtitle">Small utilities for everyday research and file handling</div>
+    </header>
+
+    <section class="section">
+      <a class="back-link" href="../"><i class="fas fa-arrow-left"></i> Back to homepage</a>
+
+      <div class="tools-grid">
+        <a class="tool-card" href="path-tool/">
+          <div class="tool-icon"><i class="fas fa-folder-open"></i></div>
+          <h2>Path Formatter</h2>
+          <p>Convert slashes in Windows paths, merge folder paths and file names, and copy the final path.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Yin Wen</p>
+    </footer>
+  </div>
+</body>
+</html>
