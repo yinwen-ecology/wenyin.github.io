@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>路径整理器</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f2;
+      --surface: #ffffff;
+      --ink: #17201b;
+      --muted: #667069;
+      --line: #d9ded6;
+      --accent: #21685b;
+      --accent-dark: #164e45;
+      --accent-soft: #e3f0ec;
+      --warn: #b25f25;
+      --shadow: 0 18px 48px rgba(23, 32, 27, 0.12);
+      --mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.2)),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.2vw, 2.15rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .status {
+      min-width: 8.5em;
+      color: var(--muted);
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    .tool {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .panel {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-inner {
+      padding: 20px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .field-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    label,
+    .label {
+      color: #2f3932;
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    textarea,
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfa;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    }
+
+    textarea {
+      min-height: 130px;
+      padding: 13px 14px;
+      resize: vertical;
+      font-family: var(--mono);
+      line-height: 1.55;
+      word-break: break-all;
+    }
+
+    input {
+      height: 46px;
+      padding: 0 14px;
+      font-family: var(--mono);
+    }
+
+    textarea:focus,
+    input:focus {
+      border-color: var(--accent);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(33, 104, 91, 0.13);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 2px 0 16px;
+    }
+
+    .segmented {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      width: min(100%, 310px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #edf1eb;
+    }
+
+    .segmented button {
+      min-height: 42px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: #354139;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+    }
+
+    .segmented button:last-child {
+      border-right: 0;
+    }
+
+    .segmented button[aria-pressed="true"] {
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 650;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, color 140ms ease;
+    }
+
+    .btn:hover {
+      border-color: #a7b2aa;
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn.primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .lang-toggle {
+      min-width: 68px;
+      padding: 0 12px;
+    }
+
+    .paste-btn {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 0.9rem;
+      flex: 0 0 auto;
+    }
+
+    .paste-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      stroke-width: 2.2;
+    }
+
+    .result-wrap {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100%;
+    }
+
+    .result {
+      min-height: 273px;
+      background: #101915;
+      color: #eff8f1;
+      border-color: #101915;
+    }
+
+    .result:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(33, 104, 91, 0.22);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8faf7;
+    }
+
+    .mini-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .error {
+      color: var(--warn);
+    }
+
+    @media (max-width: 780px) {
+      .app {
+        width: min(100% - 20px, 1120px);
+        padding: 18px 0;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 14px;
+      }
+
+      .top-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .status {
+        min-width: 0;
+        text-align: left;
+      }
+
+      .tool {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-inner {
+        padding: 16px;
+      }
+
+      .segmented {
+        width: 100%;
+      }
+
+      .btn {
+        flex: 1 1 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1 id="pageTitle">路径整理器</h1>
+      <div class="top-actions">
+        <div class="status" id="status" aria-live="polite">已就绪</div>
+        <button class="btn lang-toggle" type="button" id="languageToggle" title="Switch to English" aria-label="Switch to English">EN</button>
+      </div>
+    </header>
+
+    <section class="tool" id="pathTool" aria-label="路径整理工具">
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="field">
+            <div class="field-heading">
+              <label for="directory" id="directoryLabel">目录路径</label>
+              <div class="field-actions">
+                <button class="btn paste-btn" type="button" id="pasteDirectory">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M8 4h8"></path>
+                    <path d="M9 2h6v4H9z"></path>
+                    <path d="M8 5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                  </svg>
+                  <span id="pasteDirectoryText">粘贴</span>
+                </button>
+                <button class="btn paste-btn" type="button" id="clearDirectory">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M3 6h18"></path>
+                    <path d="M8 6V4h8v2"></path>
+                    <path d="M19 6l-1 14H6L5 6"></path>
+                  </svg>
+                  <span id="clearDirectoryText">清除</span>
+                </button>
+              </div>
+            </div>
+            <textarea id="directory" spellcheck="false"></textarea>
+          </div>
+
+          <div class="field">
+            <div class="field-heading">
+              <label for="filename" id="filenameLabel">文件名</label>
+              <div class="field-actions">
+                <button class="btn paste-btn" type="button" id="pasteFilename">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M8 4h8"></path>
+                    <path d="M9 2h6v4H9z"></path>
+                    <path d="M8 5H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                  </svg>
+                  <span id="pasteFilenameText">粘贴</span>
+                </button>
+                <button class="btn paste-btn" type="button" id="clearFilename">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M3 6h18"></path>
+                    <path d="M8 6V4h8v2"></path>
+                    <path d="M19 6l-1 14H6L5 6"></path>
+                  </svg>
+                  <span id="clearFilenameText">清除</span>
+                </button>
+              </div>
+            </div>
+            <input id="filename" spellcheck="false">
+          </div>
+
+          <div class="field">
+            <div class="label" id="modeLabel">分隔符</div>
+            <div class="controls">
+              <div class="segmented" role="group" aria-labelledby="modeLabel">
+                <button type="button" id="toBackslash" aria-pressed="true" title="转为反斜杠">\</button>
+                <button type="button" id="toSlash" aria-pressed="false" title="转为正斜杠">/</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn" type="button" id="applyDirectory">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M21 12a9 9 0 1 1-2.64-6.36"></path>
+                <path d="M21 3v6h-6"></path>
+              </svg>
+              <span id="applyDirectoryText">转换目录</span>
+            </button>
+            <button class="btn" type="button" id="swapMode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M7 7h11"></path>
+                <path d="m15 4 3 3-3 3"></path>
+                <path d="M17 17H6"></path>
+                <path d="m9 20-3-3 3-3"></path>
+              </svg>
+              <span id="swapModeText">反向</span>
+            </button>
+            <button class="btn" type="button" id="clearAll">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M3 6h18"></path>
+                <path d="M8 6V4h8v2"></path>
+                <path d="M19 6l-1 14H6L5 6"></path>
+              </svg>
+              <span id="clearAllText">清空</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-inner result-wrap">
+          <div>
+            <label for="result" id="resultLabel">合并结果</label>
+            <div class="meta">
+              <span class="chip" id="separatorChip">分隔符：\</span>
+              <span class="chip" id="lengthChip">长度：0</span>
+            </div>
+          </div>
+
+          <textarea class="result" id="result" spellcheck="false" readonly></textarea>
+
+          <div class="mini-actions">
+            <button class="btn primary" type="button" id="copyResult">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copyResultText">复制</span>
+            </button>
+            <button class="btn" type="button" id="selectResult">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M4 4h16v16H4z"></path>
+                <path d="M8 9h8"></path>
+                <path d="M8 13h8"></path>
+                <path d="M8 17h5"></path>
+              </svg>
+              <span id="selectResultText">全选</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const translations = {
+      zh: {
+        documentTitle: "路径整理器",
+        pageTitle: "路径整理器",
+        toolAria: "路径整理工具",
+        directoryLabel: "目录路径",
+        filenameLabel: "文件名",
+        modeLabel: "分隔符",
+        toBackslashTitle: "转为反斜杠",
+        toSlashTitle: "转为正斜杠",
+        applyDirectory: "转换目录",
+        swapMode: "反向",
+        clearAll: "清空",
+        resultLabel: "合并结果",
+        copyResult: "复制",
+        selectResult: "全选",
+        separator: "分隔符",
+        length: "长度",
+        languageButton: "EN",
+        languageTitle: "Switch to English",
+        ready: "已就绪",
+        directoryConverted: "目录已转换",
+        emptyCopy: "没有可复制的内容",
+        copied: "已复制",
+        copyFailed: "复制失败",
+        directionSwitched: "方向已切换",
+        cleared: "已清空",
+        selectedAll: "已全选",
+        paste: "\u7c98\u8d34",
+        pasted: "\u5df2\u7c98\u8d34",
+        pasteFailed: "\u65e0\u6cd5\u8bfb\u53d6\u526a\u8d34\u677f",
+        clearField: "\u6e05\u9664",
+        fieldCleared: "\u5df2\u6e05\u9664",
+        languageSwitched: "已切换为中文"
+      },
+      en: {
+        documentTitle: "Path Formatter",
+        pageTitle: "Path Formatter",
+        toolAria: "Path formatting tool",
+        directoryLabel: "Folder path",
+        filenameLabel: "File name",
+        modeLabel: "Separator",
+        toBackslashTitle: "Convert to backslash",
+        toSlashTitle: "Convert to slash",
+        applyDirectory: "Convert path",
+        swapMode: "Reverse",
+        clearAll: "Clear",
+        resultLabel: "Merged result",
+        copyResult: "Copy",
+        selectResult: "Select all",
+        separator: "Separator",
+        length: "Length",
+        languageButton: "中文",
+        languageTitle: "切换到中文",
+        ready: "Ready",
+        directoryConverted: "Path converted",
+        emptyCopy: "Nothing to copy",
+        copied: "Copied",
+        copyFailed: "Copy failed",
+        directionSwitched: "Direction switched",
+        cleared: "Cleared",
+        selectedAll: "Selected all",
+        paste: "Paste",
+        pasted: "Pasted",
+        pasteFailed: "Cannot read clipboard",
+        clearField: "Clear",
+        fieldCleared: "Cleared",
+        languageSwitched: "Switched to English"
+      }
+    };
+
+    const pageTitleEl = document.querySelector("#pageTitle");
+    const pathToolEl = document.querySelector("#pathTool");
+    const directoryLabelEl = document.querySelector("#directoryLabel");
+    const filenameLabelEl = document.querySelector("#filenameLabel");
+    const modeLabelEl = document.querySelector("#modeLabel");
+    const directoryEl = document.querySelector("#directory");
+    const filenameEl = document.querySelector("#filename");
+    const pasteDirectoryBtn = document.querySelector("#pasteDirectory");
+    const pasteDirectoryTextEl = document.querySelector("#pasteDirectoryText");
+    const clearDirectoryBtn = document.querySelector("#clearDirectory");
+    const clearDirectoryTextEl = document.querySelector("#clearDirectoryText");
+    const pasteFilenameBtn = document.querySelector("#pasteFilename");
+    const pasteFilenameTextEl = document.querySelector("#pasteFilenameText");
+    const clearFilenameBtn = document.querySelector("#clearFilename");
+    const clearFilenameTextEl = document.querySelector("#clearFilenameText");
+    const resultEl = document.querySelector("#result");
+    const resultLabelEl = document.querySelector("#resultLabel");
+    const statusEl = document.querySelector("#status");
+    const separatorChipEl = document.querySelector("#separatorChip");
+    const lengthChipEl = document.querySelector("#lengthChip");
+    const toBackslashBtn = document.querySelector("#toBackslash");
+    const toSlashBtn = document.querySelector("#toSlash");
+    const applyDirectoryBtn = document.querySelector("#applyDirectory");
+    const applyDirectoryTextEl = document.querySelector("#applyDirectoryText");
+    const swapModeBtn = document.querySelector("#swapMode");
+    const swapModeTextEl = document.querySelector("#swapModeText");
+    const clearAllBtn = document.querySelector("#clearAll");
+    const clearAllTextEl = document.querySelector("#clearAllText");
+    const copyResultBtn = document.querySelector("#copyResult");
+    const copyResultTextEl = document.querySelector("#copyResultText");
+    const selectResultBtn = document.querySelector("#selectResult");
+    const selectResultTextEl = document.querySelector("#selectResultText");
+    const languageToggleBtn = document.querySelector("#languageToggle");
+
+    let separator = "\\";
+    let statusTimer = 0;
+    let statusKey = "ready";
+
+    const readSavedLanguage = () => {
+      try {
+        return localStorage.getItem("pathToolLanguage") === "en" ? "en" : "zh";
+      } catch {
+        return "zh";
+      }
+    };
+
+    const saveLanguage = () => {
+      try {
+        localStorage.setItem("pathToolLanguage", language);
+      } catch {
+      }
+    };
+
+    let language = readSavedLanguage();
+
+    const t = (key) => translations[language][key] || translations.zh[key] || key;
+
+    const setStatus = (key, isError = false) => {
+      window.clearTimeout(statusTimer);
+      statusKey = key;
+      statusEl.textContent = t(key);
+      statusEl.classList.toggle("error", isError);
+      statusTimer = window.setTimeout(() => {
+        statusKey = "ready";
+        statusEl.textContent = t("ready");
+        statusEl.classList.remove("error");
+      }, 2200);
+    };
+
+    const convertSeparators = (value) => value.replace(/[\\/]/g, separator);
+
+    const stripOuterQuotes = (value) => {
+      const trimmed = value.trim();
+      if (
+        (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+        (trimmed.startsWith("'") && trimmed.endsWith("'"))
+      ) {
+        return trimmed.slice(1, -1);
+      }
+      return trimmed;
+    };
+
+    const trimTrailingSeparators = (value) => {
+      if (!value) return "";
+      if (separator === "\\" && /^[A-Za-z]:\\$/.test(value)) return value;
+      if (separator === "/" && value === "/") return value;
+      return value.replace(/[\\/]+$/g, "");
+    };
+
+    const trimLeadingSeparators = (value) => value.replace(/^[\\/]+/g, "");
+
+    const mergePath = (directory, filename) => {
+      const normalizedDirectory = convertSeparators(stripOuterQuotes(directory));
+      const normalizedFilename = convertSeparators(stripOuterQuotes(filename));
+      const cleanDirectory = trimTrailingSeparators(normalizedDirectory);
+      const cleanFilename = trimLeadingSeparators(normalizedFilename);
+
+      if (cleanDirectory && cleanFilename) {
+        return cleanDirectory.endsWith(separator)
+          ? cleanDirectory + cleanFilename
+          : cleanDirectory + separator + cleanFilename;
+      }
+
+      return cleanDirectory || cleanFilename;
+    };
+
+    const updateModeButtons = () => {
+      const backslashMode = separator === "\\";
+      toBackslashBtn.setAttribute("aria-pressed", String(backslashMode));
+      toSlashBtn.setAttribute("aria-pressed", String(!backslashMode));
+      separatorChipEl.textContent = `${t("separator")}：${separator}`;
+    };
+
+    const refresh = () => {
+      const result = mergePath(directoryEl.value, filenameEl.value);
+      resultEl.value = result;
+      lengthChipEl.textContent = `${t("length")}：${result.length}`;
+      updateModeButtons();
+    };
+
+    const renderLanguage = () => {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.title = t("documentTitle");
+      pageTitleEl.textContent = t("pageTitle");
+      pathToolEl.setAttribute("aria-label", t("toolAria"));
+      directoryLabelEl.textContent = t("directoryLabel");
+      filenameLabelEl.textContent = t("filenameLabel");
+      pasteDirectoryTextEl.textContent = t("paste");
+      pasteDirectoryBtn.title = t("paste");
+      pasteDirectoryBtn.setAttribute("aria-label", `${t("paste")} ${t("directoryLabel")}`);
+      clearDirectoryTextEl.textContent = t("clearField");
+      clearDirectoryBtn.title = t("clearField");
+      clearDirectoryBtn.setAttribute("aria-label", `${t("clearField")} ${t("directoryLabel")}`);
+      pasteFilenameTextEl.textContent = t("paste");
+      pasteFilenameBtn.title = t("paste");
+      pasteFilenameBtn.setAttribute("aria-label", `${t("paste")} ${t("filenameLabel")}`);
+      clearFilenameTextEl.textContent = t("clearField");
+      clearFilenameBtn.title = t("clearField");
+      clearFilenameBtn.setAttribute("aria-label", `${t("clearField")} ${t("filenameLabel")}`);
+      modeLabelEl.textContent = t("modeLabel");
+      toBackslashBtn.title = t("toBackslashTitle");
+      toSlashBtn.title = t("toSlashTitle");
+      applyDirectoryTextEl.textContent = t("applyDirectory");
+      swapModeTextEl.textContent = t("swapMode");
+      clearAllTextEl.textContent = t("clearAll");
+      resultLabelEl.textContent = t("resultLabel");
+      copyResultTextEl.textContent = t("copyResult");
+      selectResultTextEl.textContent = t("selectResult");
+      languageToggleBtn.textContent = t("languageButton");
+      languageToggleBtn.title = t("languageTitle");
+      languageToggleBtn.setAttribute("aria-label", t("languageTitle"));
+      statusEl.textContent = t(statusKey);
+      refresh();
+    };
+
+    const setSeparator = (nextSeparator) => {
+      separator = nextSeparator;
+      refresh();
+    };
+
+    const applyDirectoryConversion = () => {
+      directoryEl.value = convertSeparators(stripOuterQuotes(directoryEl.value));
+      refresh();
+      setStatus("directoryConverted");
+    };
+
+    const pasteFromClipboard = async (targetEl) => {
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.readText) {
+          throw new Error("Clipboard read is unavailable");
+        }
+        targetEl.value = await navigator.clipboard.readText();
+        refresh();
+        targetEl.focus();
+        setStatus("pasted");
+      } catch {
+        targetEl.focus();
+        setStatus("pasteFailed", true);
+      }
+    };
+
+    const clearField = (targetEl) => {
+      targetEl.value = "";
+      refresh();
+      targetEl.focus();
+      setStatus("fieldCleared");
+    };
+
+    const copyToClipboard = async () => {
+      const text = resultEl.value;
+      if (!text) {
+        setStatus("emptyCopy", true);
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("copied");
+      } catch {
+        resultEl.removeAttribute("readonly");
+        resultEl.select();
+        const copied = document.execCommand("copy");
+        resultEl.setAttribute("readonly", "readonly");
+        setStatus(copied ? "copied" : "copyFailed", !copied);
+      }
+    };
+
+    directoryEl.addEventListener("input", refresh);
+    filenameEl.addEventListener("input", refresh);
+    pasteDirectoryBtn.addEventListener("click", () => pasteFromClipboard(directoryEl));
+    clearDirectoryBtn.addEventListener("click", () => clearField(directoryEl));
+    pasteFilenameBtn.addEventListener("click", () => pasteFromClipboard(filenameEl));
+    clearFilenameBtn.addEventListener("click", () => clearField(filenameEl));
+    toBackslashBtn.addEventListener("click", () => setSeparator("\\"));
+    toSlashBtn.addEventListener("click", () => setSeparator("/"));
+    applyDirectoryBtn.addEventListener("click", applyDirectoryConversion);
+    swapModeBtn.addEventListener("click", () => {
+      setSeparator(separator === "\\" ? "/" : "\\");
+      setStatus("directionSwitched");
+    });
+    clearAllBtn.addEventListener("click", () => {
+      directoryEl.value = "";
+      filenameEl.value = "";
+      refresh();
+      directoryEl.focus();
+      setStatus("cleared");
+    });
+    copyResultBtn.addEventListener("click", copyToClipboard);
+    selectResultBtn.addEventListener("click", () => {
+      resultEl.focus();
+      resultEl.select();
+      setStatus("selectedAll");
+    });
+    languageToggleBtn.addEventListener("click", () => {
+      language = language === "zh" ? "en" : "zh";
+      saveLanguage();
+      renderLanguage();
+      setStatus("languageSwitched");
+    });
+
+    renderLanguage();
+  </script>
+</body>
+</html>
