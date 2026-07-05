@@ -293,6 +293,49 @@
             color: #7f8c8d;
             margin-top: 5px;
         }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .tool-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 18px;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .tool-item-icon {
+            color: #3498db;
+            font-size: 1.6rem;
+            line-height: 1;
+            padding-top: 3px;
+        }
+
+        .tool-item h3 {
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+
+        .tool-item p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -325,6 +368,21 @@
                 <p>Southwest China's karst region is a major center of plant diversity and endemism. The interaction between highly soluble bedrock and the humid subtropical climate has shaped unique evolutionary histories, large-scale diversity patterns, and functional adaptations that differ sharply from non-karst areas. My research explores the spatial distribution of plant diversity, endemism, and phylogenetic diversity in the Southwest China karst, and investigates how climatic and geological gradients jointly shape these biodiversity patterns.</p>
                 <img src="jpg4.png" style="width:100%; max-width:600px; display:block; margin:auto;">
 
+            </div>
+        </section>
+
+        <section class="section" id="tools">
+            <h2>Tools</h2>
+            <div class="tools-list">
+                <a class="tool-item" href="tools/path-tool/">
+                    <div class="tool-item-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <h3>Path Formatter</h3>
+                        <p>Convert Windows path separators, merge folder paths and file names, and copy the result.</p>
+                    </div>
+                </a>
             </div>
         </section>
         
